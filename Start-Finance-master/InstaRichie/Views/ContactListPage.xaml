@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="StartFinance.Views.ContactListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:StartFinance.ViewModels"
+    
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      
+      xmlns:vm="using:StartFinance.Models" mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <DataTemplate x:Key="ContactListDataViews">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding ContactID}" Padding="0,0,15,0"/>
+                    <TextBlock Text="{Binding FirstName}"/>
+                    <TextBlock Text="{Binding LastName}"/>
+                    <TextBlock Text="{Binding CompanyName}"/>
+                    
+                    <TextBlock Text="{Binding Phone}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True" Text="Contact">
+        </controls:PageHeader>
+        <controls:PageHeader x:Name="pageFooter" RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignBottomWithPanel="True">
+            <!--primary commands-->
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="btnUpdate" Icon="Accept"  Label="Update" Click="btnUpdate_Click" Visibility="Collapsed" />
+                <AppBarButton Icon="Add" Label="Add" Click="AddPersonalInfo_Click" />
+                <AppBarButton Icon="Edit" Label="Edit" Click="EditBarButton_Click" />
+                <AppBarButton Icon="Delete" Label="Delete" Click="DeleteBarButton_Click_1" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+        <!--Page Conetents start here-->
+        <Pivot>
+            <RelativePanel.Below>pageHeader</RelativePanel.Below>
+            <RelativePanel.Above>pageFooter</RelativePanel.Above>
+            <PivotItem Header="Contact" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="27*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"
+                            Orientation="Vertical" VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
+
+                        <TextBox x:Name="txtFirstName" Header="First Name" TextWrapping="Wrap"/>
+                        <TextBox x:Name="txtLastName" Header="Last Name" TextWrapping="Wrap"/>
+
+                        
+                        <TextBox x:Name="txtCompanyName" Header="Company Name" TextWrapping="Wrap"/>
+                        
+                        <TextBox x:Name="txtPhone" Header="Phone" TextWrapping="Wrap"/>
+                        <ListView x:Name="ContactListView" Grid.Row="0"
+                              
+                              ItemTemplate="{StaticResource ContactListDataViews}" Height="202"   >
+                            <RelativePanel.Below>pageStart</RelativePanel.Below>
+                        </ListView>
+
+                    </StackPanel>
+
+
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </RelativePanel>
+</Page>
